@@ -1,9 +1,37 @@
+import { RootLayout } from "./components/layout/RootLayout";
+import { Button } from "./components/ui/button";
+import { Checkbox } from "./components/ui/checkbox";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./components/ui/dialog";
+import { Input } from "./components/ui/input";
+import { Label } from "./components/ui/label";
+
 export function App() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="flex items-center justify-center w-36 h-36 border rounded-md">
-        <p>Hello World</p>
+    <RootLayout>
+      <div className="flex flex-col gap-4">
+        <Input placeholder="Enter your name" />
+        <Button>Click me!</Button>
+        <div className="flex items-center gap-2">
+          <Checkbox id="test" />
+          <Label htmlFor="test">Check Me!</Label>
+        </div>
+        <Dialog>
+          <DialogTrigger>Open</DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+              <DialogDescription>Dialog Description</DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
-    </div>
+    </RootLayout>
   );
 }

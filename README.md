@@ -21,6 +21,19 @@ npm run start
 4. 사용자는 투두 리스트를 수정할 수 있다.
 5. 사용자는 마감일을 기준으로 정렬할 수 있다.
 
+### 폴더 구조
+
+```
+src/
+   ㄴ components/ 공통 컴포넌트 (레이아웃, 공통 컴포넌트)
+   ㄴ domains/ 도메인 별 파일
+   ㄴ hooks/ 공통 훅
+   ㄴ styles/ 공통 스타일
+   ㄴ types/ 공통 타입
+   ㄴ utils/ 공통 유틸리티
+   ㄴ App.tsx 메인 애플리케이션
+```
+
 ### 기술 스택
 
 - **Client** - `React` / `Tailwind` / `Vite` / `Vitest`
