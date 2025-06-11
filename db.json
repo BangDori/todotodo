@@ -1,0 +1,11 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "첫 번째 투두",
+      "description": "이것은 첫 번째 투두입니다.",
+      "expired_at": "2024-07-01T23:59:59.000Z",
+      "completed": false
+    }
+  ]
+}
