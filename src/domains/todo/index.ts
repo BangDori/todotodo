@@ -1,2 +1,2 @@
-export * from "./components/TodoHeader";
-export * from "./components/TodoList";
+export { TodoHeader } from "./components/TodoHeader";
+export { TodoList } from "./components/TodoList";
