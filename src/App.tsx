@@ -1,20 +1,25 @@
+import { Suspense } from "react";
 import { RootLayout } from "./components/layout/RootLayout";
-import { TodoHeader, TodoList } from "./domains/todo";
+import {
+  TodoHeader,
+  TodoList,
+  TodoListFetcher,
+  TodoListSkeleton,
+} from "./domains/todo";
+import { ApiErrorBoundary } from "./components/error-boundary/ApiErrorBoundary";
 
 export function App() {
-  /**
-   * @todo 임시 데이터
-   */
-  const todos = [
-    { id: 1, text: "test", checked: false },
-    { id: 2, text: "test2", checked: true },
-  ];
-
   return (
     <RootLayout>
       <TodoHeader />
       <div className="mt-8">
-        <TodoList todos={todos} />
+        <ApiErrorBoundary>
+          <Suspense fallback={<TodoListSkeleton />}>
+            <TodoListFetcher>
+              <TodoList />
+            </TodoListFetcher>
+          </Suspense>
+        </ApiErrorBoundary>
       </div>
     </RootLayout>
   );

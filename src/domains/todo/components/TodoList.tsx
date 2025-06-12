@@ -1,11 +1,9 @@
-import type { Todo } from "../types/todo";
+import { useTodoList } from "../context/TodoListFetcher";
 import { TodoItem } from "./TodoItem";
 
-interface TodoListProps {
-  todos: Todo[];
-}
+export function TodoList() {
+  const todos = useTodoList();
 
-export function TodoList({ todos }: TodoListProps) {
   return (
     <section className="space-y-4">
       {todos.map((todo) => (
