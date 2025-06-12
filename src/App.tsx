@@ -1,36 +1,20 @@
 import { RootLayout } from "./components/layout/RootLayout";
-import { Button } from "./components/ui/button";
-import { Checkbox } from "./components/ui/checkbox";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./components/ui/dialog";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
+import { TodoHeader, TodoList } from "./domains/todo";
 
 export function App() {
+  /**
+   * @todo 임시 데이터
+   */
+  const todos = [
+    { id: 1, text: "test", checked: false },
+    { id: 2, text: "test2", checked: true },
+  ];
+
   return (
     <RootLayout>
-      <div className="flex flex-col gap-4">
-        <Input placeholder="Enter your name" />
-        <Button>Click me!</Button>
-        <div className="flex items-center gap-2">
-          <Checkbox id="test" />
-          <Label htmlFor="test">Check Me!</Label>
-        </div>
-        <Dialog>
-          <DialogTrigger>Open</DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Dialog Title</DialogTitle>
-              <DialogDescription>Dialog Description</DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+      <TodoHeader />
+      <div className="mt-8">
+        <TodoList todos={todos} />
       </div>
     </RootLayout>
   );
