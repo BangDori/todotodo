@@ -1,3 +1,4 @@
+import React from "react";
 import { XIcon } from "lucide-react";
 import { overlay } from "overlay-kit";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -10,7 +11,12 @@ import { useDeleteTodoMutation } from "../api/useDeleteTodoMutation";
 import type { Todo } from "../types/todo";
 import { DeleteTodoModal } from "./DeleteTodoModal";
 
-export function TodoItem({ id, text, checked }: Todo) {
+/* 체크박스 클릭 시 렌더링 최적화를 위해 React.memo 사용 */
+export const TodoItem = React.memo(function TodoItem({
+  id,
+  text,
+  checked,
+}: Todo) {
   const { mutate: checkTodo } = useCheckedTodoMutation(id);
   const { mutate: deleteTodo } = useDeleteTodoMutation();
 
@@ -66,4 +72,4 @@ export function TodoItem({ id, text, checked }: Todo) {
       </Button>
     </div>
   );
-}
+});
