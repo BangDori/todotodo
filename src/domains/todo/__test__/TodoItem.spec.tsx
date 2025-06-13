@@ -1,7 +1,10 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { OverlayProvider } from "overlay-kit";
 import { TodoItem } from "../components/TodoItem";
 import type { Todo } from "../types/todo";
+
+const user = userEvent.setup();
 
 describe("할 일 항목 삭제 모달창 테스트", () => {
   const todo: Todo = { id: "1", text: "테스트 할 일", checked: false };
@@ -12,7 +15,7 @@ describe("할 일 항목 삭제 모달창 테스트", () => {
 
     // when: 삭제 버튼을 클릭하면
     const deleteButton = screen.getByTestId("delete-todo-button");
-    fireEvent.click(deleteButton);
+    await user.click(deleteButton);
 
     // then: 삭제 모달창이 렌더링된다
     await waitFor(() => {
