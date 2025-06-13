@@ -1,11 +1,23 @@
+import { vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { TodoForm } from "../components/TodoForm";
 import { TODO_MAX_LENGTH, TODO_MIN_LENGTH } from "../constants/todo";
+import { QueryProvider } from "@/queries/provider";
+
+vi.mock("../api/useCreateTodoMutation", () => ({
+  useCreateTodoMutation: vi.fn().mockReturnValue({
+    mutate: (_todo: string, { onSuccess }: { onSuccess: () => void }) => {
+      onSuccess();
+    },
+    isPending: false,
+    error: null,
+  }),
+}));
 
 describe("할 일 추가 폼 입력 테스트", () => {
   beforeEach(() => {
     // given: 할 일 추가 폼이 렌더링된 상태에서
-    render(<TodoForm />);
+    render(<TodoForm />, { wrapper: QueryProvider });
   });
 
   it(`입력값이 ${TODO_MIN_LENGTH}글자 미만이면 추가하기 버튼이 비활성화된다`, () => {
