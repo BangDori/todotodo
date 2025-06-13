@@ -9,6 +9,10 @@ export function TodoForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    /**
+     * @todo 할 일 항목 제출 시 trim 처리 필요
+     */
+
     setTodo("");
   };
 
@@ -26,7 +30,7 @@ export function TodoForm() {
       />
       <Button
         data-testid="todo-add-button"
-        disabled={todo.length < 1}
+        disabled={todo.trim().length < 1}
         type="submit"
         role="button"
         aria-label="할 일 추가"

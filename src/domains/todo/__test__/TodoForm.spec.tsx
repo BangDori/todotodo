@@ -42,4 +42,16 @@ describe("할 일 추가 폼 입력 테스트", () => {
     // then: 입력값이 초기화된다
     expect(input).toHaveValue("");
   });
+
+  it("공백이 입력되면 추가하기 버튼이 비활성화된다", () => {
+    // given: 입력값이 공백일 때
+    const input = screen.getByTestId("todo-input");
+    const button = screen.getByTestId("todo-add-button");
+
+    fireEvent.change(input, { target: { value: " " } });
+
+    // then: 추가하기 버튼이 비활성화된다
+    expect(input).toHaveValue(" ");
+    expect(button).toBeDisabled();
+  });
 });
