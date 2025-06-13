@@ -24,6 +24,7 @@ export function TodoItem({ id, text, checked }: Todo) {
               checkTodo(checked);
             }
           }}
+          className="cursor-pointer"
         />
         <Label
           className={cn(
