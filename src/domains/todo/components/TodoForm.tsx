@@ -19,11 +19,13 @@ export function TodoForm() {
       </Label>
       <Input
         id="todo-input"
+        data-testid="todo-input"
         placeholder="할 일을 입력해주세요. (1글자 이상)"
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
       />
       <Button
+        data-testid="todo-add-button"
         disabled={todo.length < 1}
         type="submit"
         role="button"
