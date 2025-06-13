@@ -1,11 +1,14 @@
 ### 실행 방법
 
 ```bash
+git clone https://github.com/BangDori/todotodo.git
+cd todotodo
+npm install
 npm run start
 ```
 
 - 개발 서버
-  - vite 개발 서버 (default: 3000번 포트)
+  - vite 개발 서버 (default: 5173번 포트)
   - json-server 개발 서버 (default:3001번 포트)
 
 ### 요구사항
@@ -23,13 +26,17 @@ npm run start
 
 ```
 src/
-   ㄴ components/ 공통 컴포넌트 (레이아웃, 공통 컴포넌트)
-   ㄴ domains/ 도메인 별 파일
-   ㄴ hooks/ 공통 훅
-   ㄴ styles/ 공통 스타일
-   ㄴ types/ 공통 타입
-   ㄴ utils/ 공통 유틸리티
-   ㄴ App.tsx 메인 애플리케이션
+ㄴ components/ 공통 컴포넌트 (레이아웃, 공통 컴포넌트)
+ㄴ domains/ 도메인 별 파일
+   ㄴ api/
+   ㄴ components/
+   ㄴ context/
+   ㄴ types/
+   ㄴ index.ts 도메인 모듈 내보내기 파일
+ㄴ queries/ 리액트 쿼리
+ㄴ styles/ 공통 스타일
+ㄴ utils/ 공통 유틸리티
+ㄴ App.tsx 메인 애플리케이션
 ```
 
 ### 기술 스택
