@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/utils/style";
 
 import type { Todo } from "../types/todo";
+import { DeleteTodoModal } from "./DeleteTodoModal";
+import { overlay } from "overlay-kit";
 
 export function TodoItem({ text, checked }: Todo) {
   return (
@@ -21,10 +23,16 @@ export function TodoItem({ text, checked }: Todo) {
         </Label>
       </div>
       <Button
+        data-testid="delete-todo-button"
         variant="ghost"
         size="icon"
         aria-label="삭제"
-        className="hover:bg-gray-200"
+        className="cursor-pointer hover:bg-gray-200"
+        onClick={() =>
+          overlay.open(({ isOpen, close }) => (
+            <DeleteTodoModal isOpen={isOpen} onOpenChange={close} />
+          ))
+        }
       >
         <XIcon className="size-4" />
       </Button>
