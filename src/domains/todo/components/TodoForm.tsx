@@ -4,11 +4,15 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useCreateTodoMutation } from "../api/useCreateTodoMutation";
 import { TODO_MAX_LENGTH, TODO_MIN_LENGTH } from "../constants/todo";
-import { isTodoValid } from "../utils/validate";
+import { isLessThanMinLength, isMoreThanMaxLength } from "../utils/validate";
 
 export function TodoForm() {
   const [todo, setTodo] = useState("");
-  const { mutate: createTodo, isPending, error } = useCreateTodoMutation();
+  const {
+    mutate: createTodo,
+    isPending: isPendingCreateTodo,
+    error,
+  } = useCreateTodoMutation();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,24 +37,38 @@ export function TodoForm() {
         />
         <Button
           data-testid="todo-add-button"
-          disabled={isPending || !isTodoValid(todo)}
+          disabled={
+            isPendingCreateTodo ||
+            isLessThanMinLength(todo) ||
+            isMoreThanMaxLength(todo)
+          }
           type="submit"
           role="button"
           aria-label="할 일 추가"
           className="cursor-pointer"
         >
-          {isPending ? "추가중..." : "추가하기"}
+          {isPendingCreateTodo ? "추가중..." : "추가하기"}
         </Button>
       </form>
-      {error && <p className="pl-2 text-sm text-red-300">{error.message}</p>}
-      {todo.trim().length > TODO_MAX_LENGTH && (
-        <p
-          data-testid="todo-max-length-message"
-          className="pl-2 text-sm text-red-300"
-        >
-          최대 {TODO_MAX_LENGTH}자까지 입력 가능합니다.
-        </p>
-      )}
+      {error && <ErrorMessage error={error} />}
+      {isMoreThanMaxLength(todo) && <MaxLengthErrorMessage />}
     </div>
   );
 }
+
+// 에러 메시지 렌더링 함수
+const ErrorMessage = ({ error }: { error: Error }) => {
+  return <p className="pl-2 text-sm text-red-300">{error.message}</p>;
+};
+
+// 경고 메시지 렌더링 함수
+const MaxLengthErrorMessage = () => {
+  return (
+    <p
+      data-testid="todo-max-length-message"
+      className="pl-2 text-sm text-red-300"
+    >
+      최대 {TODO_MAX_LENGTH}자까지 입력 가능합니다.
+    </p>
+  );
+};
