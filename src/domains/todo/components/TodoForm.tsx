@@ -50,8 +50,10 @@ export function TodoForm() {
           {isPendingCreateTodo ? "추가중..." : "추가하기"}
         </Button>
       </form>
-      {error && <ErrorMessage error={error} />}
-      {isMoreThanMaxLength(todo) && <MaxLengthErrorMessage />}
+      <div className="min-h-[24px]">
+        {error && <ErrorMessage error={error} />}
+        {isMoreThanMaxLength(todo) && <MaxLengthErrorMessage />}
+      </div>
     </div>
   );
 }
