@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { OverlayProvider } from "overlay-kit";
 import { TodoItem } from "../components/TodoItem";
 import type { Todo } from "../types/todo";
-import { QueryProvider } from "@/queries/provider";
+import { QueryProvider } from "@/queries";
 
 const user = userEvent.setup();
 const Provider = ({ children }: { children: React.ReactNode }) => (

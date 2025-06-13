@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/queries/queryKeys";
+import { queryKeys } from "@/queries";
 
 import type { Todo } from "../types/todo";
 

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Todo } from "../types/todo";
-import { queryKeys } from "@/queries/queryKeys";
+import { queryKeys } from "@/queries";
 
 async function createTodo(todo: string): Promise<Todo> {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/todos`, {

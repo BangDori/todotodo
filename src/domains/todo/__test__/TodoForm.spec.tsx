@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryProvider } from "@/queries/provider";
+import { QueryProvider } from "@/queries";
 import { TodoForm } from "../components/TodoForm";
 import { TODO_MAX_LENGTH, TODO_MIN_LENGTH } from "../constants/todo";
 
