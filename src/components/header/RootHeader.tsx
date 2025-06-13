@@ -1,4 +1,4 @@
-export function TodoHeader() {
+export function RootHeader() {
   return (
     <header className="grid gap-2 text-center">
       <h3 className="text-2xl font-bold">TodoList</h3>

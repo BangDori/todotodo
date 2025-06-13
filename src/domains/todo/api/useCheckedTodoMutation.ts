@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@/queries/queryKeys";
+import { queryKeys } from "@/queries";
 import type { Todo } from "../types/todo";
 
-async function checkTodo(id: string, checked: boolean) {
+export async function checkTodo(id: string, checked: boolean) {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },

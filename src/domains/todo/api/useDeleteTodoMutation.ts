@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@/queries/queryKeys";
+import { queryKeys } from "@/queries";
 
 async function deleteTodo(id: string) {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${id}`, {
