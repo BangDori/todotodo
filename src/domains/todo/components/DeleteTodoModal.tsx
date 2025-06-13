@@ -12,11 +12,13 @@ import { Button } from "@/components/ui/button";
 interface DeleteTodoModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  onDelete: () => void;
 }
 
 export function DeleteTodoModal({
   isOpen,
   onOpenChange,
+  onDelete,
 }: DeleteTodoModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -45,7 +47,7 @@ export function DeleteTodoModal({
             role="button"
             aria-label="할 일 삭제 버튼"
             variant="destructive"
-            onClick={() => {}}
+            onClick={onDelete}
             className="cursor-pointer"
           >
             삭제

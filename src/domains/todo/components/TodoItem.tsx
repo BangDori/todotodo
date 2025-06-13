@@ -1,14 +1,17 @@
 import { XIcon } from "lucide-react";
+import { overlay } from "overlay-kit";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/utils/style";
-
-import type { Todo } from "../types/todo";
+import { notify } from "@/utils/toastify";
+import { useDeleteTodoMutation } from "../api/useDeleteTodoMutation";
 import { DeleteTodoModal } from "./DeleteTodoModal";
-import { overlay } from "overlay-kit";
+import type { Todo } from "../types/todo";
 
-export function TodoItem({ text, checked }: Todo) {
+export function TodoItem({ id, text, checked }: Todo) {
+  const { mutate: deleteTodo } = useDeleteTodoMutation();
+
   return (
     <div className="flex items-center justify-between rounded-md border px-4 py-2 shadow-xs">
       <div className="flex items-center gap-3">
@@ -30,7 +33,20 @@ export function TodoItem({ text, checked }: Todo) {
         className="cursor-pointer hover:bg-gray-200"
         onClick={() =>
           overlay.open(({ isOpen, close }) => (
-            <DeleteTodoModal isOpen={isOpen} onOpenChange={close} />
+            <DeleteTodoModal
+              isOpen={isOpen}
+              onOpenChange={close}
+              onDelete={() => {
+                deleteTodo(id, {
+                  onSuccess: () =>
+                    notify("할 일 항목이 정상적으로 삭제되었습니다.", {
+                      type: "success",
+                    }),
+                  onError: (error) => notify(error.message, { type: "error" }),
+                  onSettled: close,
+                });
+              }}
+            />
           ))
         }
       >
