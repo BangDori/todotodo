@@ -1,9 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import {
-  TODO_MAX_LENGTH,
-  TODO_MIN_LENGTH,
-  TodoForm,
-} from "../components/TodoForm";
+import { TodoForm } from "../components/TodoForm";
+import { TODO_MAX_LENGTH, TODO_MIN_LENGTH } from "../constants/todo";
 
 describe("할 일 추가 폼 입력 테스트", () => {
   beforeEach(() => {
