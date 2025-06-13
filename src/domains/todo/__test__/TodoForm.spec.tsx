@@ -34,13 +34,11 @@ describe("할 일 추가 폼 입력 테스트", () => {
   });
 
   it(`입력값이 ${TODO_MIN_LENGTH}글자 이상일 때 추가하기 버튼을 클릭하면 입력값이 초기화된다`, () => {
-    // given: 입력값의 길이가 TODO_MIN_LENGTH 이상일 때
+    // when: 입력값의 길이가 TODO_MIN_LENGTH 이상일 때 추가하기 버튼을 클릭하면
     const input = screen.getByTestId("todo-input");
     const button = screen.getByTestId("todo-add-button");
 
     fireEvent.change(input, { target: { value: "테스트" } });
-
-    // when: 추가하기 버튼을 클릭하면
     fireEvent.click(button);
 
     // then: 입력값이 초기화된다
@@ -48,7 +46,7 @@ describe("할 일 추가 폼 입력 테스트", () => {
   });
 
   it("공백이 입력되면 추가하기 버튼이 비활성화된다", () => {
-    // given: 입력값이 공백일 때
+    // when: 입력값이 공백일 때
     const input = screen.getByTestId("todo-input");
     const button = screen.getByTestId("todo-add-button");
 
@@ -60,7 +58,7 @@ describe("할 일 추가 폼 입력 테스트", () => {
   });
 
   it(`${TODO_MAX_LENGTH + 1}자 이상 입력되면 추가 버튼이 비활성화된다`, () => {
-    // given: 입력값이 길이가 TODO_MAX_LENGTH + 1 이상일 때
+    // when: 입력값이 길이가 TODO_MAX_LENGTH + 1 이상일 때
     const input = screen.getByTestId("todo-input");
     const button = screen.getByTestId("todo-add-button");
 
@@ -74,7 +72,7 @@ describe("할 일 추가 폼 입력 테스트", () => {
   });
 
   it(`${TODO_MAX_LENGTH + 1}자 이상 입력되면 경고 메시지가 표시된다`, () => {
-    // given: 입력값이 길이가 TODO_MAX_LENGTH + 1 이상일 때
+    // when: 입력값이 길이가 TODO_MAX_LENGTH + 1 이상일 때
     const input = screen.getByTestId("todo-input");
 
     fireEvent.change(input, {
