@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/queries/queryKeys";
+import type { Todo } from "../types/todo";
 
 async function checkTodo(id: string, checked: boolean) {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${id}`, {
@@ -22,7 +23,24 @@ export function useCheckedTodoMutation(id: string) {
 
   return useMutation({
     mutationFn: (checked: boolean) => checkTodo(id, checked),
-    onSuccess: () => {
+    onMutate: async (checked) => {
+      await queryClient.cancelQueries({ queryKey: queryKeys.todos });
+      const previousTodos = queryClient.getQueryData<Todo[]>(queryKeys.todos);
+
+      if (previousTodos) {
+        queryClient.setQueryData<Todo[]>(queryKeys.todos, (prev) =>
+          prev?.map((todo) => (todo.id === id ? { ...todo, checked } : todo))
+        );
+      }
+
+      return { previousTodos };
+    },
+    onError: (_error, _checked, context) => {
+      if (context?.previousTodos) {
+        queryClient.setQueryData(queryKeys.todos, context.previousTodos);
+      }
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.todos });
     },
   });
