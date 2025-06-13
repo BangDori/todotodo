@@ -17,4 +17,9 @@ export default defineConfig({
     globals: true,
     setupFiles: "./src/setupTests.ts",
   },
+  server: {
+    watch: {
+      ignored: ["**/db.json"],
+    },
+  },
 });
