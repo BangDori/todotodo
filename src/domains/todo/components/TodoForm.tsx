@@ -2,21 +2,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-
-export const TODO_MIN_LENGTH = 1;
-export const TODO_MAX_LENGTH = 50;
+import { useCreateTodoMutation } from "../api/useCreateTodoMutation";
+import { TODO_MAX_LENGTH, TODO_MIN_LENGTH } from "../constants/todo";
+import { isLessThanMinLength, isMoreThanMaxLength } from "../utils/validate";
 
 export function TodoForm() {
   const [todo, setTodo] = useState("");
+  const {
+    mutate: createTodo,
+    isPending: isPendingCreateTodo,
+    error,
+  } = useCreateTodoMutation();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    /**
-     * @todo 할 일 항목 제출 시 trim 처리 필요
-     */
-
-    setTodo("");
+    createTodo(todo.trim(), {
+      onSuccess: () => setTodo(""),
+    });
   };
 
   return (
@@ -35,25 +38,37 @@ export function TodoForm() {
         <Button
           data-testid="todo-add-button"
           disabled={
-            todo.trim().length > TODO_MAX_LENGTH ||
-            todo.trim().length < TODO_MIN_LENGTH
+            isPendingCreateTodo ||
+            isLessThanMinLength(todo) ||
+            isMoreThanMaxLength(todo)
           }
           type="submit"
           role="button"
           aria-label="할 일 추가"
           className="cursor-pointer"
         >
-          추가하기
+          {isPendingCreateTodo ? "추가중..." : "추가하기"}
         </Button>
       </form>
-      {todo.trim().length > TODO_MAX_LENGTH && (
-        <p
-          data-testid="todo-max-length-message"
-          className="pl-2 text-sm text-red-300"
-        >
-          최대 {TODO_MAX_LENGTH}자까지 입력 가능합니다.
-        </p>
-      )}
+      {error && <ErrorMessage error={error} />}
+      {isMoreThanMaxLength(todo) && <MaxLengthErrorMessage />}
     </div>
   );
 }
+
+// 에러 메시지 렌더링 함수
+const ErrorMessage = ({ error }: { error: Error }) => {
+  return <p className="pl-2 text-sm text-red-300">{error.message}</p>;
+};
+
+// 경고 메시지 렌더링 함수
+const MaxLengthErrorMessage = () => {
+  return (
+    <p
+      data-testid="todo-max-length-message"
+      className="pl-2 text-sm text-red-300"
+    >
+      최대 {TODO_MAX_LENGTH}자까지 입력 가능합니다.
+    </p>
+  );
+};
