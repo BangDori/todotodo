@@ -20,7 +20,10 @@ export function DeleteTodoModal({
 }: DeleteTodoModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent aria-description="delete-todo-modal">
+      <DialogContent
+        data-testId="delete-todo-modal"
+        aria-description="delete-todo-modal"
+      >
         <DialogHeader>
           <DialogTitle>할 일을 삭제하시겠습니까?</DialogTitle>
           <DialogDescription>이 작업은 되돌릴 수 없습니다.</DialogDescription>

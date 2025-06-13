@@ -23,6 +23,7 @@ export function TodoItem({ text, checked }: Todo) {
         </Label>
       </div>
       <Button
+        data-testid="delete-todo-button"
         variant="ghost"
         size="icon"
         aria-label="삭제"
