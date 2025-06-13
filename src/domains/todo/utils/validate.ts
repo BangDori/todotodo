@@ -1,14 +1,21 @@
 import { TODO_MAX_LENGTH, TODO_MIN_LENGTH } from "../constants/todo";
 
 /**
- * 할 일 입력값의 유효성을 검증합니다.
- * 1글자 이상 50자 이하인 경우 유효합니다.
+ * 할 일 입력값이 최소 길이보다 짧은지 여부를 검증합니다.
  *
  * @param todo 할 일 입력값
- * @returns 할 일 입력값이 유효한지 여부
+ * @returns 할 일 입력값이 최소 길이보다 짧은지 여부
  */
-export function isTodoValid(todo: string) {
-  const len = todo.trim().length;
+export function isLessThanMinLength(todo: string) {
+  return todo.trim().length < TODO_MIN_LENGTH;
+}
 
-  return len >= TODO_MIN_LENGTH && len <= TODO_MAX_LENGTH;
+/**
+ * 할 일 입력값이 최대 길이보다 긴지 여부를 검증합니다.
+ *
+ * @param todo 할 일 입력값
+ * @returns 할 일 입력값이 최대 길이보다 긴지 여부
+ */
+export function isMoreThanMaxLength(todo: string) {
+  return todo.trim().length > TODO_MAX_LENGTH;
 }
