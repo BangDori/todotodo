@@ -30,9 +30,24 @@ export function DeleteTodoModal({
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">취소</Button>
+            <Button
+              type="button"
+              role="button"
+              aria-label="할 일 삭제 취소 버튼"
+              variant="outline"
+              className="cursor-pointer"
+            >
+              취소
+            </Button>
           </DialogClose>
-          <Button variant="destructive" onClick={() => {}}>
+          <Button
+            type="button"
+            role="button"
+            aria-label="할 일 삭제 버튼"
+            variant="destructive"
+            onClick={() => {}}
+            className="cursor-pointer"
+          >
             삭제
           </Button>
         </DialogFooter>
