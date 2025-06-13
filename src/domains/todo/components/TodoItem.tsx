@@ -21,7 +21,9 @@ export function TodoItem({ id, text, checked }: Todo) {
           checked={checked}
           onCheckedChange={(checked) => {
             if (typeof checked === "boolean") {
-              checkTodo(checked);
+              checkTodo(checked, {
+                onError: (error) => notify(error.message, { type: "error" }),
+              });
             }
           }}
           className="cursor-pointer"
