@@ -21,7 +21,7 @@ export function DeleteTodoModal({
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
-        data-testId="delete-todo-modal"
+        data-testid="delete-todo-modal"
         aria-description="delete-todo-modal"
       >
         <DialogHeader>
